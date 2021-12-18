@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'gtk3'
+require 'pry'
+require 'config'
+
+application_root_path = File.expand_path('..', __dir__)
+
+# Load config
+Config.load_and_set_settings(File.join(application_root_path, 'config', 'settings.yml'))
+
+# Require all ruby files in the app folder
+Dir[File.join(application_root_path, '**', '*.rb')].each { |file| require file }
+
+app = Life::Application.new
+puts app.run
